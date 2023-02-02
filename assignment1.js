@@ -3,10 +3,15 @@ const Order = require("./order");
 
 const OrderState = Object.freeze({
     WELCOMING:   Symbol("welcoming"),
+    MENU: Symbol("menu"),
+    MENU1: Symbol("menu1"),
+    MENU2: Symbol("Menu2"), 
     TYPE:   Symbol("type"),
     CURRY:   Symbol("curries"),
-    TOPPINGS:   Symbol("toppings"),
-    DRINKS:  Symbol("drinks")
+    TYPE1:   Symbol("type1"),
+    CURRY1:   Symbol("curries1"),
+    DRINKS:  Symbol("drinks"),
+    DRINKS1:  Symbol("drinks1")
 });
 
 module.exports = class FoodOrder extends Order{
@@ -31,9 +36,9 @@ module.exports = class FoodOrder extends Order{
                     aReturn.push("Welcome to Food Cort.");
                     aReturn.push("********* Menu *********");
                     aReturn.push("Menu1: Plain Dosa or Masala Dosa Price:$15");
-                    aReturn.push("Menu2: Naan Price:$15");
+                    aReturn.push("Menu2: Plain Naan or Butter Naan Price:$15");
                     aReturn.push("All curries Price:$15")
-                    aReturn.push("Drinks:Tea,Pepsi,7up,Cocacola Price:$5");
+                    aReturn.push("Drinks:Tea,Pepsi  Price:$5");
                     aReturn.push("Please choose menu- Menu1 or Menu2?");  
                     this.stateCur = OrderState.MENU;           
                 break;
@@ -49,10 +54,10 @@ module.exports = class FoodOrder extends Order{
                         this.stateCur = OrderState.MENU2;
                         aReturn.push("What you like- Plain Naan or Butter Naan?");      
                     }
-                    /*if(this.sMenu.toLowerCase() != "menu1" && this.sMenu.toLowerCase() != "menu2")
+                    if(this.sMenu.toLowerCase() != "menu1" && this.sMenu.toLowerCase() != "menu2")
                     {
                         aReturn.push("Please enter valid input- Menu1 or Menu2");   
-                    } */     
+                    }     
                 break;
             case OrderState.MENU1:
                     this.sType = sInput;            
@@ -63,6 +68,7 @@ module.exports = class FoodOrder extends Order{
                     } 
                     else
                     { 
+                        this.rate += 10;
                         aReturn.push("What you like- Sambar or Chutney ?");
                         this.stateCur = OrderState.CURRY;
                     }
@@ -76,6 +82,7 @@ module.exports = class FoodOrder extends Order{
                     } 
                     else
                     {
+                        this.rate += 5;
                         aReturn.push("Would you like drinks with that?");
                         this.stateCur = OrderState.DRINKS;
                     }
@@ -91,8 +98,9 @@ module.exports = class FoodOrder extends Order{
                     if(this.sDrinks)
                     {
                         aReturn.push(`Drinks: ${this.sDrinks}`);
+                        this.rate += 5;
                     }
-                    aReturn.push(`Total Price: $ ${total}`);
+                    aReturn.push(`Total Price: $ ${this.rate}`);
                     let d = new Date(); 
                     d.setMinutes(d.getMinutes() + 20);
                     aReturn.push(`Please pick it up at ${d.toTimeString()}`);
@@ -106,19 +114,21 @@ module.exports = class FoodOrder extends Order{
                     } 
                     else
                     { 
-                        aReturn.push("What you like- Veg or Chicken ?");
+                        this.rate += 10;
+                        aReturn.push("What you like- Daal or Chicken ?");
                         this.stateCur = OrderState.CURRY1;
                     }
                     break;
                 case OrderState.CURRY1:
                     this.sCurries1 = sInput;
-                    if(this.sCurries1.toLowerCase() != "veg" && this.sCurries1.toLowerCase() != "chicken")
+                    if(this.sCurries1.toLowerCase() != "daal" && this.sCurries1.toLowerCase() != "chicken")
                     {
                         aReturn.push("Invalid Input");
-                        aReturn.push("Please enter valid input- Veg or Chicken");  
+                        aReturn.push("Please enter valid input- Daal or Chicken");  
                     } 
                     else
                     {
+                        this.rate += 5;
                         aReturn.push("Would you like drinks with that?");
                         this.stateCur = OrderState.DRINKS1;
                     }
@@ -135,8 +145,9 @@ module.exports = class FoodOrder extends Order{
                     if(this.sDrinks1)
                     {
                         aReturn.push(`Drinks: ${this.sDrinks1}`);
+                        this.rate += 5;
                     }
-                    //aReturn.push(`Total Price: $ ${total}`);
+                    aReturn.push(`Total Price: $ ${this.rate}`);
                     let dt = new Date(); 
                     dt.setMinutes(dt.getMinutes() + 20);
                     aReturn.push(`Please pick it up at ${dt.toTimeString()}`);
