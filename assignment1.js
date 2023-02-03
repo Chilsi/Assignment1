@@ -11,7 +11,7 @@ const OrderState = Object.freeze({
     TYPE1:   Symbol("type1"),
     CURRY1:   Symbol("curries1"),
     DRINKS:  Symbol("drinks"),
-    SWEET:  Symbol("sweet"),
+    SWEETS:  Symbol("sweets"),
     PAYMENT: Symbol("payment"),
 });
 
@@ -26,8 +26,8 @@ module.exports = class FoodOrder extends Order{
         this.sCurries1 = "";
         this.sDrinks = "";
         this.sSweets = "";
-        this.sItem = "dosa";
-        this.sItem1 = "naan";
+        this.sItem = "Dosa";
+        this.sItem1 = "Naan";
     }
     handleInput(sInput){
         let aReturn = [];
@@ -67,7 +67,7 @@ module.exports = class FoodOrder extends Order{
                         aReturn.push("Please enter valid input- Plain or Masala");  
                     else
                     { 
-                        this.rate += 10;
+                        this.rate += 15;
                         aReturn.push("What you like- Sambar or Chutney ?");
                         this.stateCur = OrderState.CURRY;
                     }
@@ -130,7 +130,7 @@ module.exports = class FoodOrder extends Order{
                         aReturn.push("Please enter valid input- Plain or Butter");  
                     else
                     { 
-                        this.rate += 10;
+                        this.rate += 15;
                         aReturn.push("What you like- Daal or Chicken ?");
                         this.stateCur = OrderState.CURRY1;
                     }
