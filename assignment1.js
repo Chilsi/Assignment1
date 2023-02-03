@@ -5,14 +5,13 @@ const OrderState = Object.freeze({
     WELCOMING:   Symbol("welcoming"),
     MENU: Symbol("menu"),
     MENU1: Symbol("menu1"),
-    MENU2: Symbol("Menu2"), 
+    MENU2: Symbol("menu2"), 
     TYPE:   Symbol("type"),
     CURRY:   Symbol("curries"),
     TYPE1:   Symbol("type1"),
     CURRY1:   Symbol("curries1"),
     DRINKS:  Symbol("drinks"),
     SWEETS:  Symbol("sweets"),
-    PAYMENT: Symbol("payment"),
 });
 
 module.exports = class FoodOrder extends Order{
