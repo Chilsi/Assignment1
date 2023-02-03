@@ -39,8 +39,8 @@ module.exports = class FoodOrder extends Order{
                     aReturn.push("Menu1: Dosa -Plain or Masala Price:$15");
                     aReturn.push("Menu2: Naan -Plain or Butter Naan Price:$15");
                     aReturn.push("Curries: Sambar,Chutney,Daal,Chicken Price:$5");
-                    aReturn.push("Sweets:Rasgulla,Kheer  Price:$5");
-                    aReturn.push("Drinks:Coffee,Pepsi  Price:$5");
+                    aReturn.push("Sweets: Rasgulla,Kheer  Price:$5");
+                    aReturn.push("Drinks: Coffee,Pepsi  Price:$5");
                     aReturn.push("********* End *********");
                     aReturn.push("Please choose menu- Menu1 or Menu2");  
                     this.stateCur = OrderState.MENU;           
