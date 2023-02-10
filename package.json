@@ -5,19 +5,31 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node assignment1.js",
+    "start": "node index.js",
     "dev": "node index.js"
   },
-  
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rhildred/es6test.git"
+  },
   "keywords": [
     "node",
     "es6",
     "problem",
     "solving"
   ],
-  "author": "Chilsi Hasan",
-   "dependencies": {
-    "express": "*"
+  "author": "Rich Hildred",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rhildred/es6test/issues"
+  },
+  "homepage": "https://github.com/rhildred/es6test#readme",
+  "dependencies": {
+    "engine.io": "*",
+    "express": "*",
+    "socket.io": "*",
+    "twilio": "*",
+    "underscore": "*"
   },
   "babel": {
     "presets": [
