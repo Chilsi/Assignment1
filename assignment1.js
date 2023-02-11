@@ -46,7 +46,7 @@ module.exports = class FoodOrder extends Order{
                     this.contactName = sInput; 
                     var regName = /^[a-zA-Z]+$/;
                     if(!regName.test(this.contactName))
-                            aReturn.push("Please enter valid name: Firstname");
+                            aReturn.push("Please enter valid name: firstname");
                     else
                     {
                             aReturn.push("********* Menu *********");
@@ -200,7 +200,7 @@ module.exports = class FoodOrder extends Order{
                     this.isDone(true);
                     let d = new Date();
                     d.setMinutes(d.getMinutes() + 20);
-                    aReturn.push(`Your order will be delivered at ${d.toTimeString()} in the address ${sInput}`);
+                    aReturn.push(`Your order will be delivered at ${d.toTimeString()} in the address`);
                     break;
                
         }
