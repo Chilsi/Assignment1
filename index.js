@@ -11,7 +11,7 @@ server.listen(port, function () {
   console.log("Server listening at port %d", port);
 });
 
-const FoodOrder = require("./assignment1");
+const ShwarmaOrder = require("./assignment1");
 const e = require('express');
 const { exception } = require('console');
 
@@ -24,7 +24,7 @@ let oSockets = {};
 let oOrders = {};
 app.post("/payment/:phone", (req, res) => {
   // this happens when the order is complete
-  //sFrom = req.params.phone;
+  sFrom = req.params.phone;
   const aReply = oOrders[sFrom].handleInput(req.body);
   const oSocket = oSockets[sFrom];
   // send messages out of turn
@@ -57,9 +57,9 @@ app.get("/payment/:phone", (req, res) => {
 
 app.post("/payment", (req, res) => {
   // this happens when the user clicks on the link in SMS
-  const sFrom = req.params.phone;
-  //const sFrom = req.body.telephone;
-  oOrders[sFrom] = new FoodOrder(sFrom);
+  //const sFrom = req.params.phone;
+  const sFrom = req.body.telephone;
+  oOrders[sFrom] = new ShwarmaOrder(sFrom);
   res.end(oOrders[sFrom].renderForm(req.body.title, req.body.price));
 });
 
@@ -68,7 +68,7 @@ app.post("/sms", (req, res) => {
   let sFrom = req.body.From || req.body.from;
   let sUrl = `${req.headers['x-forwarded-proto'] || req.protocol}://${req.headers['x-forwarded-host'] || req.headers.host}${req.baseUrl}`;
   if (!oOrders.hasOwnProperty(sFrom)) {
-    oOrders[sFrom] = new FoodOrder(sFrom, sUrl);
+    oOrders[sFrom] = new ShwarmaOrder(sFrom, sUrl);
   }
   if (oOrders[sFrom].isDone()) {
     delete oOrders[sFrom];

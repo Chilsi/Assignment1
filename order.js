@@ -1,7 +1,6 @@
-module.exports = class Order{
-    constructor(sName, sUrl){
-        this.sName = sName;
-        this.rate = 0;
+module.exports = class order{
+    constructor(sNumber, sUrl){
+        this.sNumber = sNumber;
         this.sUrl = sUrl;
         this.bDone = false;
     }

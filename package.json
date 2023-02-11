@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rhildred/es6test.git"
+    "url": "git+https://github.com/Chilsi/Assignment1"
   },
   "keywords": [
     "node",
@@ -18,12 +18,8 @@
     "problem",
     "solving"
   ],
-  "author": "Rich Hildred",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/rhildred/es6test/issues"
-  },
-  "homepage": "https://github.com/rhildred/es6test#readme",
+  "author": "Chilsi Hasan",
+    "homepage": "https://github.com/Chilsi/Assignment1#readme",
   "dependencies": {
     "engine.io": "*",
     "express": "*",
