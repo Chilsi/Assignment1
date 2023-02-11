@@ -37,171 +37,171 @@ module.exports = class FoodOrder extends Order{
         switch(this.stateCur)
         {
             case OrderState.WELCOMING:
-                    this.stateCur = OrderState.BEGIN;
-                    aReturn.push("Welcome to Mix-Match Foodie");
-                    aReturn.push("Please enter your name");
-                    break;
+                  this.stateCur = OrderState.BEGIN;
+                  aReturn.push("Welcome to Mix-Match Foodie");
+                  aReturn.push("Please enter your name");
+                  break;
           
             case OrderState.BEGIN:   
-                    this.contactName = sInput; 
-                    var regName = /^[a-zA-Z]+$/;
-                    if(!regName.test(this.contactName))
-                            aReturn.push("Please enter valid name: firstname");
-                    else
-                    {
-                            aReturn.push("********* Menu *********");
-                            aReturn.push("Menu1: Dosa -Plain or Masala Price:$15");
-                            aReturn.push("Menu2: Naan -Plain or Butter Naan Price:$15");
-                            aReturn.push("Curries: Sambar,Chutney,Daal,Chicken Price:$5");
-                            aReturn.push("Sweets: Rasgulla,Kheer  Price:$5");
-                            aReturn.push("Drinks: Coffee,Pepsi  Price:$5");
-                            aReturn.push("********* End *********");
-                            aReturn.push("Please choose menu- Menu1 or Menu2"); 
-                            this.stateCur = OrderState.MENU;
-                    }        
-                    break;
+                  this.contactName = sInput; 
+                  var regName = /^[a-zA-Z]+$/;
+                  if(!regName.test(this.contactName))
+                    aReturn.push("Please enter valid name: firstname");
+                  else
+                  {
+                    aReturn.push("********* Menu *********");
+                    aReturn.push("Menu1: Dosa -Plain or Masala Price:$15");
+                    aReturn.push("Menu2: Naan -Plain or Butter Naan Price:$15");
+                    aReturn.push("Curries: Sambar,Chutney,Daal,Chicken Price:$5");
+                    aReturn.push("Sweets: Rasgulla,Kheer  Price:$5");
+                    aReturn.push("Drinks: Coffee,Pepsi  Price:$5");
+                    aReturn.push("********* End *********");
+                    aReturn.push("Please choose menu- Menu1 or Menu2"); 
+                    this.stateCur = OrderState.MENU;
+                  }        
+                  break;
 
             case OrderState.MENU:    
-                    this.sMenu = sInput; 
-                    if(this.sMenu.toLowerCase() == "menu1")
-                    {
-                        this.sItem = "Dosa";
-                        aReturn.push("What you like: Dosa -Plain or Masala, Price:$15?");
-                        this.stateCur = OrderState.MENU1;    
-                    }
-                    if(this.sMenu.toLowerCase() == "menu2")
-                    {
-                      this.sItem1 = "Naan";
-                      this.stateCur = OrderState.MENU2;
-                      aReturn.push("What you like: Naan -Plain or Butter, Price:$15?");      
-                    }
-                    if(this.sMenu.toLowerCase() != "menu1" && this.sMenu.toLowerCase() != "menu2")
-                        aReturn.push("Please enter valid input- Menu1 or Menu2");       
-                    break;
+                  this.sMenu = sInput; 
+                  if(this.sMenu.toLowerCase() == "menu1")
+                  {
+                    this.sItem = "Dosa";
+                    aReturn.push("What you like: Dosa -Plain or Masala, Price:$15?");
+                    this.stateCur = OrderState.MENU1;    
+                  }
+                  if(this.sMenu.toLowerCase() == "menu2")
+                  {
+                    this.sItem1 = "Naan";
+                    this.stateCur = OrderState.MENU2;
+                    aReturn.push("What you like: Naan -Plain or Butter, Price:$15?");      
+                  }
+                  if(this.sMenu.toLowerCase() != "menu1" && this.sMenu.toLowerCase() != "menu2")
+                    aReturn.push("Please enter valid input- Menu1 or Menu2");       
+                  break;
 
             case OrderState.MENU1:
-                    this.sType = sInput;            
-                    if(this.sType.toLowerCase() != "plain" && this.sType.toLowerCase() != "masala")
-                        aReturn.push("Please enter valid input- Plain or Masala");  
-                    else
-                    { 
-                        this.rate += 15;
-                        aReturn.push("What you like- Sambar or Chutney, Price:$5 ?");
-                        this.stateCur = OrderState.CURRY;
-                    }
-                    break;
+                  this.sType = sInput;            
+                  if(this.sType.toLowerCase() != "plain" && this.sType.toLowerCase() != "masala")
+                    aReturn.push("Please enter valid input- Plain or Masala");  
+                  else
+                  { 
+                    this.rate += 15;
+                    aReturn.push("What you like- Sambar or Chutney, Price:$5 ?");
+                    this.stateCur = OrderState.CURRY;
+                  }
+                  break;
 
             case OrderState.CURRY:
-                    this.sCurries = sInput;
-                    if(this.sCurries.toLowerCase() != "sambar" && this.sCurries.toLowerCase() != "chutney")
-                        aReturn.push("Please enter valid input- Sambar or Chutney");  
-                    else
-                    {
-                        this.rate += 5;
-                        aReturn.push("Would you like drinks(Coffee or Pepsi) with that, Price:$5?");
-                        this.stateCur = OrderState.DRINKS;
-                    }
-                    break;
+                  this.sCurries = sInput;
+                  if(this.sCurries.toLowerCase() != "sambar" && this.sCurries.toLowerCase() != "chutney")
+                    aReturn.push("Please enter valid input- Sambar or Chutney");  
+                  else
+                  {
+                    this.rate += 5;
+                    aReturn.push("Would you like drinks(Coffee or Pepsi) with that, Price:$5?");
+                    this.stateCur = OrderState.DRINKS;
+                  }
+                  break;
 
             case OrderState.DRINKS:
-                    this.stateCur = OrderState.PAYMENT; 
-                    this.sDrinks = sInput;   
-                    if(this.sDrinks.toLowerCase() == "no")
-                    {
-                        aReturn.push("Thank-you for your order of");
-                        aReturn.push(`${this.sType} ${this.sItem} with ${this.sCurries} `);
-                        aReturn.push(`Drinks: ${this.sDrinks}`);
-                        aReturn.push(`Total price: $ ${this.rate}`);
-                    }
-                    else if(this.sDrinks.toLowerCase() == "coffee")
-                    {
-                        this.rate += 5;
-                        aReturn.push("Thank-you for your order of");
-                        aReturn.push(`${this.sType} ${this.sItem} with ${this.sCurries} `);
-                        aReturn.push(`Drinks: ${this.sDrinks}`);
-                        aReturn.push(`Total price: $ ${this.rate}`);  
-                    }
-                    else if(this.sDrinks.toLowerCase() == "pepsi")
-                    {
-                        this.rate += 5;
-                        aReturn.push("Thank-you for your order of");
-                        aReturn.push(`${this.sType} ${this.sItem} with ${this.sCurries} `);
-                        aReturn.push(`Drinks: ${this.sDrinks}`);
-                        aReturn.push(`Total price: $ ${this.rate}`);  
-                    }
-                    else
-                    {
-                        aReturn.push("Please enter valid input- Coffee or Pepsi"); 
-                    }
+                  this.stateCur = OrderState.PAYMENT; 
+                  this.sDrinks = sInput;   
+                  if(this.sDrinks.toLowerCase() == "no")
+                  {
+                    aReturn.push("Thank-you for your order of");
+                    aReturn.push(`${this.sType} ${this.sItem} with ${this.sCurries} `);
+                    aReturn.push(`Drinks: ${this.sDrinks}`);
+                    aReturn.push(`Total price: $ ${this.rate}`);
+                  }
+                  else if(this.sDrinks.toLowerCase() == "coffee")
+                  {
+                    this.rate += 5;
+                    aReturn.push("Thank-you for your order of");
+                    aReturn.push(`${this.sType} ${this.sItem} with ${this.sCurries} `);
+                    aReturn.push(`Drinks: ${this.sDrinks}`);
+                    aReturn.push(`Total price: $ ${this.rate}`);  
+                  }
+                  else if(this.sDrinks.toLowerCase() == "pepsi")
+                  {
+                    this.rate += 5;
+                    aReturn.push("Thank-you for your order of");
+                    aReturn.push(`${this.sType} ${this.sItem} with ${this.sCurries} `);
+                    aReturn.push(`Drinks: ${this.sDrinks}`);
+                    aReturn.push(`Total price: $ ${this.rate}`);  
+                  }
+                  else
+                  {
+                    aReturn.push("Please enter valid input- Coffee or Pepsi"); 
+                  }
                     aReturn.push(`Please pay for your order here`);
                     aReturn.push(`${this.sUrl}/payment/${this.sNumber}/`);  
                     break; 
 
             case OrderState.MENU2:
-                    this.sType1 = sInput;            
-                    if(this.sType1.toLowerCase() != "plain" && this.sType1.toLowerCase() != "butter")
-                        aReturn.push("Please enter valid input- Plain or Butter");  
-                    else
-                    { 
-                        this.rate += 15;
-                        aReturn.push("What you like- Daal or Chicken, Price:$5?");
-                        this.stateCur = OrderState.CURRY1;
-                    }
-                    break;
+                  this.sType1 = sInput;            
+                  if(this.sType1.toLowerCase() != "plain" && this.sType1.toLowerCase() != "butter")
+                    aReturn.push("Please enter valid input- Plain or Butter");  
+                  else
+                  { 
+                    this.rate += 15;
+                    aReturn.push("What you like- Daal or Chicken, Price:$5?");
+                    this.stateCur = OrderState.CURRY1;
+                  }
+                  break;
                     
-                case OrderState.CURRY1:
-                    this.sCurries1 = sInput;
-                    if(this.sCurries1.toLowerCase() != "daal" && this.sCurries1.toLowerCase() != "chicken")
-                        aReturn.push("Please enter valid input- Daal or Chicken");  
-                    else
-                    {
-                        this.rate += 5;
-                        aReturn.push("Would you like sweets(Rasgulla, Kheer) with that, Price:$5?");
-                        this.stateCur = OrderState.SWEETS;
-                    }
-                    break;
+            case OrderState.CURRY1:
+                  this.sCurries1 = sInput;
+                  if(this.sCurries1.toLowerCase() != "daal" && this.sCurries1.toLowerCase() != "chicken")
+                    aReturn.push("Please enter valid input- Daal or Chicken");  
+                  else
+                  {
+                    this.rate += 5;
+                    aReturn.push("Would you like sweets(Rasgulla, Kheer) with that, Price:$5?");
+                    this.stateCur = OrderState.SWEETS;
+                  }
+                  break;
 
-                case OrderState.SWEETS: 
-                    this.stateCur = OrderState.PAYMENT;
-                    this.sSweets = sInput;   
-                    if(sInput.toLowerCase() == "no")
-                    {
-                        aReturn.push("Thank-you for your order of");
-                        aReturn.push(`${this.sType1} ${this.sItem1} with ${this.sCurries1} `);
-                        aReturn.push(`Sweets: ${this.sSweets}`);
-                        aReturn.push(`Total price: $ ${this.rate}`);
-                    }
-                    else if(sInput.toLowerCase() == "rasgulla")
-                    {
-                        this.rate += 5;
-                        aReturn.push("Thank-you for your order of");
-                        aReturn.push(`${this.sType1} ${this.sItem1} with ${this.sCurries1} `);
-                        aReturn.push(`Sweets: ${this.sSweets}`);
-                        aReturn.push(`Total price: $ ${this.rate}`);   
-                    }
-                    else if(sInput.toLowerCase() == "kheer")
-                    {
-                        this.rate += 5;
-                        aReturn.push("Thank-you for your order of");
-                        aReturn.push(`${this.sType1} ${this.sItem1} with ${this.sCurries1} `);
-                        aReturn.push(`Sweets: ${this.sSweets}`);
-                        aReturn.push(`Total price: $ ${this.rate}`);   
-                    }
-                    else
-                    {    
-                      aReturn.push("Please enter valid input- Rasgulla or Kheer"); 
-                    }
-                    aReturn.push(`Please pay for your order here`);
-                    aReturn.push(`${this.sUrl}/payment/${this.sNumber}/`);                    
-                    break;
+            case OrderState.SWEETS: 
+                  this.stateCur = OrderState.PAYMENT;
+                  this.sSweets = sInput;   
+                  if(sInput.toLowerCase() == "no")
+                  {
+                    aReturn.push("Thank-you for your order of");
+                    aReturn.push(`${this.sType1} ${this.sItem1} with ${this.sCurries1} `);
+                    aReturn.push(`Sweets: ${this.sSweets}`);
+                    aReturn.push(`Total price: $ ${this.rate}`);
+                  }
+                  else if(sInput.toLowerCase() == "rasgulla")
+                  {
+                    this.rate += 5;
+                    aReturn.push("Thank-you for your order of");
+                    aReturn.push(`${this.sType1} ${this.sItem1} with ${this.sCurries1} `);
+                    aReturn.push(`Sweets: ${this.sSweets}`);
+                    aReturn.push(`Total price: $ ${this.rate}`);   
+                  }
+                  else if(sInput.toLowerCase() == "kheer")
+                  {
+                    this.rate += 5;
+                    aReturn.push("Thank-you for your order of");
+                    aReturn.push(`${this.sType1} ${this.sItem1} with ${this.sCurries1} `);
+                    aReturn.push(`Sweets: ${this.sSweets}`);
+                    aReturn.push(`Total price: $ ${this.rate}`);   
+                  }
+                  else
+                  {    
+                    aReturn.push("Please enter valid input- Rasgulla or Kheer"); 
+                  }
+                  aReturn.push(`Please pay for your order here`);
+                  aReturn.push(`${this.sUrl}/payment/${this.sNumber}/`);                    
+                  break;
 
-                case OrderState.PAYMENT:
-                    console.log(sInput);
-                    this.isDone(true);
-                    let d = new Date();
-                    d.setMinutes(d.getMinutes() + 20);
-                    aReturn.push(`Your order will be delivered at ${d.toTimeString()} in the address`);
-                    break;
+            case OrderState.PAYMENT:
+                  console.log(sInput);
+                  this.isDone(true);
+                  let d = new Date();
+                  d.setMinutes(d.getMinutes() + 20);
+                  aReturn.push(`Your order will be delivered at ${d.toTimeString()} in the address`);
+                  break;
                
         }
         return aReturn;
