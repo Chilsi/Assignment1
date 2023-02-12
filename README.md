@@ -1,6 +1,6 @@
 To run:
 
-1. 1.	Sign up for PayPal developer sandbox and get a client id
+1. Sign up for PayPal developer sandbox and get a client id.
 2.	The first time run `npm install`
 3.	`SB_CLIENT_ID=<put_in_your_client_id> npm start` or Press ctrl-f5 while your focus is on index.js.
 4.	Type anything to start running, for example: Hi
